@@ -4,8 +4,30 @@ O projeto de formatura tem como objetivo o desenvolvimento de um sistema de auto
 
 \section{Hardware}
 
-% TODO cada tipo de módulo
-% TODO colocar fotos
+Para a criação dos módulos de hardware, foram escolhidos componentes de \wiot{} comerciais, que possuem preços acessíveis, ampla documentação disponível e uma comunidade de desenvolvedores crescente.
+
+A interconexão dos componentes, bem como a comunicação com o mundo externo pela internet será intermediada por um servidor local, que rodará na plataforma Raspberry Pi, rodando um sistema operacional Linux (Raspbian, baseado em Debian) e que dispõe da interface de hardware necessária para conexão com a rede.
+
+Os sensores e atuadores devem ser conectados fisicamente com um módulo controlador, de modo que, para contornarmos essa limitação, utilizaremos módulos ESP8266 para transmissão sem fio por meio de Wi-Fi. Esses módulos serão responsáveis pela transmissão das informações recebidas para o servidor local. 
+
+\begin{figure}[htb]
+	\caption{\label{fig:QuatroModulos}Módulos de Hardware}
+	\begin{center}
+		\includegraphics[scale=0.5]{QuatroModulos}
+	\end{center}
+	\legend{Fonte: os autores}
+\end{figure}
+
+Em geral, esses módulos consistem do microcontrolador, relés, sensores e fontes/conversores de tensão a depender do módulo, além de um circuito para manutenção corretiva baseado no astável 555, conectados à rede Wi-Fi e/ou trabalhando como pontos de acesso. Para casos de falha de conexão, há um algoritmo de novas tentativas com tempos progressivamente maiores conforme as falhas ocorrerem, que busca deixar o módulo disponível para outras funções enquanto o serviço não está disponível. Para evitar o travamento, um sinal de \textit{keep alive} é monitorado, e um circuito anti-travamento deve ativar um \textit{hard reset} (reset por hardware), ou então uma rotina de \textit{soft reset} é acionada.
+
+\begin{figure}[htb]
+	\caption{\label{fig:diagramaModuloBase}Diagrama do Módulo de Iluminação}
+	\begin{center}
+		\includegraphics[scale=0.5]{diagramaModuloBase}
+	\end{center}
+	\legend{Fonte: os autores}
+\end{figure}
+
 
 \section{Software}
 
