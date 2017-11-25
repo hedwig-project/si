@@ -1,6 +1,16 @@
 \chapter{Breve Descrição do Projeto de Formatura}
 
-O projeto de formatura tem como objetivo o desenvolvimento de um sistema de automação residencial completo, com foco na robustez, segurança e facilidade de uso. Para tanto, a modelagem de uma arquitetura flexível, mas que suportasse os requisitos iniciais, tem papel essencial no trabalho. A plataforma do sistema é enfática em sua proposta de camadas, na qual a integração entre os níveis é feito por meio de troca de mensagens, utilizando a infraestrutura de comunicação desenvolvida. No decorrer desta seção, serão apresentados os pontos essenciais do projeto, bem como a descrição das soluções adotadas.
+O projeto de formatura tem como objetivo o desenvolvimento de um sistema de automação residencial completo, com foco na robustez, segurança e facilidade de uso. Para tanto, a modelagem de uma arquitetura flexível, mas que suportasse os requisitos iniciais, tem papel essencial no trabalho. A plataforma do sistema é enfática em sua proposta de camadas, na qual a integração entre os níveis é feita por meio de troca de mensagens, utilizando a infraestrutura de comunicação desenvolvida. A \autoref{fig:sistemaHedwig} ilustra o sistema como um todo.
+
+\begin{figure}[H]
+	\caption{\label{fig:sistemaHedwig}Sistema Hedwig}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{sistemaHedwig}
+	\end{center}
+	\legend{Fonte: os autores}
+\end{figure}
+
+No decorrer desta seção, serão apresentados os pontos essenciais do projeto, bem como a descrição das soluções adotadas.
 
 \section{Hardware}
 
@@ -10,7 +20,7 @@ A interconexão dos componentes, bem como a comunicação com o mundo externo pe
 
 Os sensores e atuadores devem ser conectados fisicamente com um módulo controlador, de modo que, para contornarmos essa limitação, utilizaremos módulos ESP8266 para transmissão sem fio por meio de Wi-Fi. Esses módulos serão responsáveis pela transmissão das informações recebidas para o servidor local. 
 
-\begin{figure}[htb]
+\begin{figure}[H]
 	\caption{\label{fig:QuatroModulos}Módulos de Hardware}
 	\begin{center}
 		\includegraphics[scale=0.5]{QuatroModulos}
@@ -20,7 +30,7 @@ Os sensores e atuadores devem ser conectados fisicamente com um módulo controla
 
 Em geral, esses módulos consistem do microcontrolador, relés, sensores e fontes/conversores de tensão a depender do módulo, além de um circuito para manutenção corretiva baseado no astável 555, conectados à rede Wi-Fi e/ou trabalhando como pontos de acesso. Para casos de falha de conexão, há um algoritmo de novas tentativas com tempos progressivamente maiores conforme as falhas ocorrerem, que busca deixar o módulo disponível para outras funções enquanto o serviço não está disponível. Para evitar o travamento, um sinal de \textit{keep alive} é monitorado, e um circuito anti-travamento deve ativar um \textit{hard reset} (reset por hardware), ou então uma rotina de \textit{soft reset} é acionada.
 
-\begin{figure}[htb]
+\begin{figure}[H]
 	\caption{\label{fig:diagramaModuloBase}Diagrama do Módulo de Iluminação}
 	\begin{center}
 		\includegraphics[scale=0.5]{diagramaModuloBase}
@@ -31,21 +41,33 @@ Em geral, esses módulos consistem do microcontrolador, relés, sensores e fonte
 
 \section{Software}
 
-As partes de software do sistema são divididas de acordo com a sua aplicação, localização e uso. Neste momento, serão considerados somente os softwares de aplicação, de maneira que todo o software de operação do hardware está descrito na no item (MARCAR ITEM).
+As partes de software do sistema são divididas de acordo com a sua aplicação, localização e uso.
 
 Em contato mais próximo dos dispositivos de hardware está o servidor local, Morpheus. O servidor local é responsável pela interconexão dos módulos da casa com os serviços de nuvem disponíveis. A troca de informação entre os módulos físicos e o Morpheus é realizada por meio de mensagens, codificadas em um protocolo desenvolvido pelo grupo, e encaminhadas por meio do protocolo MQTT, com um broker local disponível na residência. O envio de mensagens é feito em tópicos, aos quais o módulo pode publicar ou se inscrever de acordo com o seu serial number, de modo a evitar que um módulo consiga ter acesso ao canal de outro módulo. O servidor local, no entanto, precisa de um certificado válido para que possa se inscrever no seu canal, onde a troca de mensagens é realizada com criptografia assíncrona. Quando a mensagem chega nesse servidor, ela é convertida em um formato intermediário e colocada em um fila de entrada, onde uma thread de um pool irá retirá-la para efetuar o processamento, e conversão para um JSON esperado pela nuvem.
 
 A segunda transmissão de dados, entre o Morpheus e os serviços de nuvem é feita por meio de um canal WebSocket, no qual a conexão permanece ativa a todo o momento. Os serviços de nuvem tratam a chegada da mensagem, e interagem com um cliente web, por meio de um dashboard, sobre o qual o usuário pode interagir.
 
-% TODO imagens da dashboard
+\begin{figure}[htb]
+	\caption{\label{fig:dashboard}Dashboard}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{dashboard}
+	\end{center}
+	\legend{Fonte: os autores}
+\end{figure}
 
-Para que a robustez do sistema seja assegurada, o projeto também conta com um sistema emergencial, no caso de não haver internet na casa ou de ocorrer qualquer problema com o servidor local. O usuário pode se conectar diretamente na rede de um dos módulos, sem a integração com a nuvem.
+Para que a robustez do sistema seja assegurada, o projeto também conta com um sistema emergencial, no caso de não haver internet na casa ou de ocorrer qualquer problema com o servidor local. O usuário pode se conectar diretamente na rede de um dos módulos, sem a integração com a nuvem, utilizando um aplicativo de backup.
 
 \section{Bases de Dados}
 
 São usadas duas bases de dados na implementação do Hedwig. O primeiro é um banco de dados não-relacional baseado em documentos, que armazena dados coletados pelos sensores e informações sobre as entidades relevantes ao sistema - usuários e seus dispositivos conectados. O segundo é um banco de dados em memória que guarda informações sobre os dispositivos que estão conectados à nuvem no momento, facilitando a comunicação entre aplicativos e os controladores de cada casa.
 
-% TODO imagem da arquitetura da nuvem
+\begin{figure}[H]
+	\caption{\label{fig:Cloud}Arquitetura da Nuvem}
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{Cloud}
+	\end{center}
+	\legend{Fonte: os autores}
+\end{figure}
 
 \subsection{Dados de Sensores, Dispositivos e Usuários}
 
@@ -65,18 +87,18 @@ Para a comunicação entre a casa e a nuvem, ocorreram mudanças durante o plane
 
 Em alto nível, é representado na \autoref{fig:arquiteturaHedwig} o diagrama arquitetural do projeto. Na \autoref{fig:diagramaDeComunicacao}, é disponibilizada a arquitetura do servidor local (Morpheus) e a sua conectividade com a nuvem e módulos.
 
-\begin{figure}[htb]
+\begin{figure}[H]
 	\caption{\label{fig:arquiteturaHedwig}Diagrama Arquitetural}
 	\begin{center}
-	    \includegraphics[scale=0.5]{arquiteturaHedwig}
+	    \includegraphics[width=0.9\textwidth]{arquiteturaHedwig}
 	\end{center}
 	\legend{Fonte: os autores}
 \end{figure}
 
-\begin{figure}[htb]
+\begin{figure}[H]
 	\caption{\label{fig:diagramaDeComunicacao}Diagrama de Comunicação}
 	\begin{center}
-	    \includegraphics[scale=0.4]{diagramaDeComunicacao}
+	    \includegraphics[width=0.9\textwidth]{diagramaDeComunicacao}
 	\end{center}
 	\legend{Fonte: os autores}
 \end{figure}
