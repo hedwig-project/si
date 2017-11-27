@@ -6,15 +6,19 @@ Para uma análise completa das características do Sistema de Informação, faz-
 
 \subsection{Tecnologia}
 
-Do ponto de vista tecnológico, o sistema busca a automação residencial, com a qual o usuário pode ter acesso à sua casa remotamente por meio da operação de um cliente web, com mobilidade, segurança e facilidade de uso. Foram desenvolvidos módulos físicos, cuja implementação tem seu núcleo no componente ESP8266, módulo com capacidade de processamento e radiotransmissão adequada aos padrões IEEE 802.11 -- WiFi. Por meio de transdutores e atuadores, acoplados aos módulos, o sistema obtém dados sobre o estado atual da casa (temperatura, umidade, luminosidade, etc) e pode agir sobre outros componentes (como o acendimento de uma lâmpada, ou a abertura dos portões). A comunicação entre os módulos e os serviços de nuvens passa pelo servidor local, que se conectará diretamente aos servidores remotos por meio de um canal seguro e protegido.
+Do ponto de vista tecnológico, o sistema busca a automação residencial, permitindo ao usuário ter acesso à sua casa remotamente por meio da interação com um aplicativo, proporcionando mobilidade, segurança e facilidade de uso.
 
-O uso de tecnologias modernas nas plataformas criadas é natural ao usuário, de modo que o seu emprego é transparente, e garante familiaridade e facilidade quando operada. Assim, o cliente não necessita da compra de algum outro dispositivo específico para interagir com sua casa. O seu smartphone, que já é utilizado no dia a dia, entra como o principal mecanismo de controle e troca de informações com a casa inteligente. A criação de uma dashboard responsiva, permite que o painel de controle da casa possa ser acessado tanto por computadores pessoais (PCs) quanto por tablets e smartphones, sem que a experiência do usuário (UX - User Experience) seja afetada pela troca.
+Foram desenvolvidos módulos físicos, cuja implementação tem seu núcleo no componente ESP8266, componente com capacidade de processamento e radiotransmissão adequada aos padrões IEEE 802.11 (Wi-Fi). Por meio de transdutores e atuadores, acoplados aos módulos, o sistema obtém dados sobre o estado atual da casa (temperatura, umidade, luminosidade, etc.) e pode agir sobre outros componentes (como o acendimento de uma lâmpada ou a abertura dos portões). A comunicação entre os módulos e os serviços de nuvens passa pelo servidor local, que se conectará diretamente aos servidores remotos por meio de um canal seguro e protegido.
 
-% TODO falar mais do aplicativo cliente do ponto de vista tecnológico
+Um ponto importante é que a arquitetura foi concebida para permitir fácil expansão, ou seja, podem ser acrescentados novos módulos, sensores e dispositivos conectados a qualquer momento. Nesse trabalho, foram demonstrados os funcionamentos de sensores simples como de temperatura e umidade, um sensor de presença, um sensor magnético de abertura e um controle de radiofrequência. Contudo, nada impede que no futuro possam ser usadas sensores de ruído e monóxido de carbono, câmeras e eletrodomésticos inteligentes.
+
+As tecnologias modernas empregadas no desenvolvimento das plataformas são familiares ao usuário, garantindo o fácil entendimento de como suas partes funcionam. O cliente não necessita comprar outro dispositivo específico para interagir com sua casa. O seu smartphone, que já é utilizado no dia-a-dia, entra como o principal mecanismo de controle e troca de informações com a casa inteligente. Foi criado um aplicativo web responsivo com uma dashboard que permite o controle da casa tanto por computadores pessoais (PCs) quanto por tablets e smartphones, sem que a experiência do usuário seja afetada pela troca.
+
+Para isso, foram usadas técnicas exploradas pelo conceito de \emph{Progressive Web App}, uma classe de aplicativos que se aproveita das funcionalidades do navegadores mais modernos e da evolução da navegação em dispositivos móveis, visando ir além das aplicações web tradicionais e fornecer a melhor experiência ao usuário. Um \emph{Progressive Web App} deve ser: confiável, permitindo que o usuário tenha acesso pelo menos ao conteúdo mais básico independentemente da qualidade da conexão de dados; rápido, respondendo prontamente às interações; envolvente, criando uma experiência imersiva.
 
 \subsection{Organização}
 
-Do ponto de vista organizacional, a empresa criada (Hedwig) estará continuamente buscando uma relação mais próxima a seus clientes. O conhecimento obtido a partir da análise de dados das casas é utilizado para a melhoria dos sistemas existentes, de modo que possam ser adaptados às necessidades e padrões de uso do morador. Utilizando-se técnicas de \emph{Business Intelligence} podem-se desenvolver novos produtos para suprir demandas específicas, que passarão a ser conhecidas. Um dos maiores desafios organizacionais para a empresa é a segurança dos dados obtidos, bem como da interação entre a casa e o cliente. Um possível ataque poderia sequestrar informações confidenciais ou roubar o acesso do cliente à casa, podendo trazer danos irreparáveis tanto aos nossos usuários quanto à Hedwig, que perderá a confiança e o prestígio.
+Do ponto de vista organizacional, a empresa criada -- Hedwig -- estará continuamente buscando uma relação mais próxima a seus clientes. O conhecimento obtido a partir da análise de dados das casas é utilizado para a melhoria dos sistemas existentes, de modo que possam ser adaptados às necessidades e padrões de uso do morador. Utilizando-se técnicas de \emph{Business Intelligence} podem-se desenvolver novos produtos para suprir demandas específicas, que passarão a ser conhecidas. Um dos maiores desafios organizacionais para a empresa é a segurança dos dados obtidos, bem como da interação entre a casa e o cliente. Um possível ataque poderia sequestrar informações confidenciais ou roubar o acesso do cliente à casa, podendo trazer danos irreparáveis tanto aos nossos usuários quanto à Hedwig, que perderá a confiança e o prestígio.
 
 \subsection{Pessoas}
 
@@ -28,23 +32,25 @@ Tais desafios devem ser observados e atendidos pelo sistema, de modo que não ha
 
 \subsection{Produção}
 
-Desde o início, o baixo custo de produção na elaboração do projeto foi uma das prioridades. O baixo custo é determinante porque, com base na realidade nacional, as perspectivas de expansão só podem ser concretizadas se houver viabilidade para a implementação no maior número possível de residências. Assim, levando-se em conta que a automação de sua casa não é uma prioridade para a maioria das famílias no Brasil, cuja renda é significativamente inferior à renda média de países desenvolvidos, um produto caro, desta natureza, mesmo que ofereça melhores acabamentos, não terá condições de ser adquirido por um número alto de consumidores fora dos grandes centros.
+Desde o início, o baixo custo de produção na elaboração do projeto foi uma das prioridades. O baixo custo é determinante porque, com base na realidade nacional, as perspectivas de expansão só podem ser concretizadas se houver viabilidade para a implementação no maior número possível de residências. Assim, levando-se em conta que a automação de sua casa não é uma prioridade para a maioria das famílias no Brasil, cuja renda é significativamente inferior à renda média de países desenvolvidos, um produto caro desta natureza, mesmo que ofereça melhores acabamentos, não terá condições de ser adquirido por um número alto de consumidores fora dos grandes centros.
 
 Os módulos projetados são pequenos e simples de serem desenvolvidos em escala. A parte mais essencial é o componente ESP8266, conforme explicado anteriormente. Assim, é necessário o contato diretamente com empresas fornecedoras, com o estabelecimento de contratos cujos valores unitários sejam baixos para quantidades elevadas.
 
-Os sistemas de software serão desenvolvidos por uma equipe altamente qualificada e, posteriormente aos testes, distribuídos aos usuários em formas de atualizações. Tais atualizações podem ser gratuitas, para correções ou mudanças que afetam a segurança ou performance, ou pagas, quando há a inserção de novas funcionalidades.
+Os sistemas de software serão desenvolvidos por uma equipe altamente qualificada e, posteriormente aos testes, distribuídos aos usuários em formas de atualizações. Tais atualizações podem ser gratuitas, para correções ou mudanças que afetam a segurança ou performance, ou pagas, quando há a inserção de novas funcionalidades. Isso vale tanto para o firmware dos módulos físicos, como para aplicativos clientes que podem ser distribuídos como \emph{Software as a Service}.
 
-Planeja-se a utilização de softwares de gestão da cadeia de suprimento para o controle e otimização da produção, por meio de um modelo Pull.
+Planeja-se a utilização de softwares de gestão da cadeia de suprimento para o controle e otimização da produção, por meio de um modelo \emph{Pull}.
 
 \subsection{Recursos Humanos}
 
-O departamento de recursos humanos da empresa (RH) será responsável por atrair novos talentos alinhados à cultura e às propostas da empresa, bem como na manutenção dos funcionários presentes. O desenvolvimento de uma cultura interna na empresa é essencial para manter os funcionários sempre extremamente motivados e alavancando cada vez mais a empresa. 
+O departamento de recursos humanos da empresa (RH) será responsável por atrair novos talentos alinhados à cultura e às propostas da empresa, bem como na manutenção dos funcionários presentes. O desenvolvimento de uma cultura interna na empresa é essencial para manter os funcionários sempre extremamente motivados e alavancando cada vez mais a empresa.
+
+Uma forma de manter a satisfação de profissionais qualificados e mitigar sua evasão seria a criação de planos de carreira, elaborados por uma colaboração entre funcionário e gestor. Outra medida seria fornecer bolsas, cursos e inscrições em conferências para que os funcionários mantenham-se atualizados com as últimas inovações no mercado.
 
 Serão utilizadas ferramentas de Gestão de Relacionamento com o Funcionário (ERM), para que haja maior contato e feedback entre os colaboradores.
 
 \subsection{Finanças e Contabilidade}
 
-O departamento de finanças e contabilidade serão responsáveis por toda a organização fiscal da empresa, bem como pela geração dos relatórios de vendas, custos, compras de matéria prima, etc. Assim como o departamento de Recursos Humanos, os departamentos de finanças e contabilidade farão uso de Aplicações Integradas, fornecidas por empresas responsáveis e de tradição na área.
+O departamento de finanças e contabilidade é responsável por toda a organização fiscal da empresa, bem como pela geração dos relatórios de vendas, custos, compras de matéria prima, etc. Assim como o departamento de Recursos Humanos, os departamentos de finanças e contabilidade farão uso de Aplicações Integradas, fornecidas por empresas responsáveis e de tradição na área.
 
 \subsection{Vendas e Marketing}
 
@@ -56,21 +62,21 @@ Como se trata de um produto novo, ainda não conhecido por grande parte da popul
 
 \subsection{Cadeia de Suprimento}
 
-A matéria-prima necessária ao desenvolvimento dos módulos constitui-se, majoritariamente, de componentes eletrônicos, como resistores, capacitores, relés, e outros produtos mais elaborados, como sensores de luminosidade, temperatura e umidade, atuadores diversos, microcontroladores  e radiotransmissores. Os maiores produtores mundiais desses produtos estão localizados na China, mas possuem uma ampla e bem estabelecida rede de transporte para o Brasil.
+A matéria-prima necessária ao desenvolvimento dos módulos constitui-se, majoritariamente, de componentes eletrônicos como resistores, capacitores, relés e outros produtos mais elaborados, como sensores de luminosidade, temperatura e umidade, atuadores diversos, microcontroladores e radiotransmissores. Os maiores produtores mundiais desses produtos estão localizados na China, mas possuem uma ampla e bem estabelecida rede de transporte para o Brasil.
 
-A instalação inicial da fábrica será no Estado de São Paulo, para onde a matéria prima será transportada, por via terrestre, em caminhões. Serão realizados contratos e acordos diversos, para que os preços sejam negociados, bem como os planejamentos para abastecimento do estoque de material. Assim, um número reduzido e otimizado de fretamentos pode suprir as necessidades, de modo que os custos sejam reduzidos.
+A instalação inicial da fábrica será no Estado de São Paulo, para onde a matéria-prima será transportada por via terrestre em caminhões. Serão realizados contratos e acordos diversos para que os preços sejam negociados, bem como os planejamentos para abastecimento do estoque de material. Assim, um número reduzido e otimizado de fretamentos pode suprir as necessidades, de modo que os custos sejam reduzidos.
 
-As placas de fenolite, com o circuito impresso, serão projetadas e enviadas para produção na China, também a um custo reduzido. A qualidade do produto é muito mais elevada, quando elaborado em uma fábrica que possui equipamentos de usinagem modernos, e alguns componentes essenciais podem ser soldados na própria instalação.
+As placas de fenolite com o circuito impresso serão projetadas e então enviadas para produção na China, também a um custo reduzido. A qualidade do produto é muito mais elevada quando elaborado em uma fábrica que possui equipamentos de usinagem modernos. Alguns componentes essenciais podem ser soldados na própria instalação.
 
-Os controladores serão gravados com a versão atualizada do firmware e, após isso, será também soldado na placa, sendo este um dos últimos passos do processo de montagem física. Após isso, devem ser realizados testes padrões e automatizados, para garantir que os módulos estejam funcionando normalmente.
+Os controladores serão gravados com a versão atualizada do firmware e, após isso, serão também soldados na placa, sendo este um dos últimos passos do processo de montagem física. Após isso, devem ser realizados testes padrões e automatizados para garantir que os módulos estejam funcionando normalmente.
 
-O estoque deve ser mínimo, de modo a manter os custos e gastos o mais baixo possível. Por isso a necessidade de boas técnicas de \emph{Business Intelligence}, para que sejam estudados os comportamentos de demanda e uso do produto, e para que essa demanda seja atendida sempre que necessário.
+O estoque deve ser mínimo, de modo a manter os custos e gastos o mais baixos possíveis. Por isso a necessidade de boas técnicas de \emph{Business Intelligence}, para que sejam estudados os comportamentos de demanda e uso do produto, e para que essa demanda seja atendida sempre que necessário.
 
 Para o transporte, deverá ser realizado um estudo inicial de logística, analisando as rotas mais viáveis e econômicas para levar o produto até os compradores. Para vendas pequenas, pode-se utilizar serviços já disponíveis no mercado, e para vendas maiores, uma empresa de fretamento poderá ser contratada.
 
 \subsection{Forças Competitivas}
 
-Na \autoref{fig:porter}, é possível visualizar as cincos forças competitivas de Porter, de modo que seja analisado o negócio, mas pelo lado externo, para que obtenção de sua atratividade e valor.
+Na \autoref{fig:porter}, estão representadas as cincos forças competitivas de Porter, de modo que o negócio seja analisado pelo lado externo, dentro do contexto do mercado, a fim de que qualificar sua atratividade e valor.
 
 \begin{figure}[H]
 	\caption{\label{fig:porter}Cinco forças competitivas de Porter}
@@ -82,14 +88,14 @@ Na \autoref{fig:porter}, é possível visualizar as cincos forças competitivas 
 
 \subsection{Cadeia de Valor}
 
-Conforme o definido por Michael Porter (Citar), para analisar todas as atividades desempenhadas pela empresa, com a finalidade de se criar vantagem competitiva em relação aos seus concorrentes, pode-se utilizar o modelo da Cadeia de Valor. Na \autoref{fig:cadeiaValor}, verifica-se a sua estrutura, que será detalhada em seguida.
+Para analisar todas as atividades desempenhadas pela empresa com a finalidade de se criar vantagem competitiva em relação aos seus concorrentes, pode-se utilizar o modelo da Cadeia de Valor. Na \autoref{fig:cadeiaDeValor}, verifica-se a sua estrutura, que será detalhada em seguida.
 
 \begin{figure}[H]
-	\caption{\label{fig:cadeiaValor}Cadeia de Valor de Porter}
+	\caption{\label{fig:cadeiaDeValor}Cadeia de Valor de Porter}
 	\begin{center}
-	    \includegraphics[scale=0.8]{cadeiaValor}
+	    \includegraphics[width=0.7\textwidth]{cadeiaDeValor}
 	\end{center}
-	\legend{Fonte: CITAR http://www.gestaoporprocessos.com.br/o-modelo-de-cadeia-de-valor-de-michael-porter/}
+	\legend{Fonte: os autores}
 \end{figure}
 
 \begin{description}
@@ -97,56 +103,58 @@ Conforme o definido por Michael Porter (Citar), para analisar todas as atividade
 
     \item[Gestão de Recursos Humanos:]Responsável pela manutenção dos funcionários, e a contratação de novos profissionais, bem como resolução de possíveis conflitos internos.
 
-    \item[Desenvolvimento Tecnológico:]Essencial na Hedwig, já que faz parte da base de nossos produtos, e é um fator determinante para que a empresa esteja sempre na liderança do mercado.
+    \item[Desenvolvimento Tecnológico:]Essencial na Hedwig, já que faz parte da base de nossos produtos e é um fator determinante para que a empresa esteja sempre na liderança do mercado.
 
     \item[Aquisição/Compras:]Negociação com os fornecedores e todas as atividades relativas a obtenção de matéria-prima.
 
-    \item[Logística de Entrada:]A matéria prima é importada da China, e é transportada de navio até o porto de Santos, de onde seguirá para a empresa, por meio de uma empresa responsável pelo fretamento.
+    \item[Logística de Entrada:]A matéria prima é importada da China e é transportada de navio até o porto de Santos, de onde seguirá para a empresa por meio de uma empresa responsável pelo fretamento.
 
-    \item[Operações:]Englobam as atividades de montagem física dos módulos, com a soldagem dos componentes nas placas de fenolite, e a instalação do microcontrolador.
-    
+    \item[Operações:]Englobam as atividades de montagem física dos módulos, com a soldagem dos componentes nas placas de fenolite e a instalação do microcontrolador.
+
     \item[Logística de Saída:]Utilização de serviços terceirizados para o transporte dos módulos às lojas.
 
     \item[Marketing e Vendas:]Atividades relacionadas com o oferecimento dos nossos produtos, tanto aos consumidores finais quanto a lojas específicas.
 
-    \item[Serviço:]Atividades de pós-venda e suporte, para que o consumidor esteja sempre satisfeito com os nossos produtos, e quaisquer problemas encontrados devem ser resolvidos prontamente.
+    \item[Serviço:]Atividades de pós-venda e suporte, para que o consumidor esteja sempre satisfeito com os nossos produtos, e quaisquer problemas encontrados sejam resolvidos prontamente.
 \end{description}
 
 \section{Aspectos Éticos e de Segurança}
 
 Por se tratar de um sistema presente dentro da casa de usuários, é de extrema importância que os dados que trafegam pelo mesmo sejam privados e que estejam armazenados de forma segura contra possíveis ações de \textit{hackers} e criminosos que tentem obtê-los, já que tratam-se de dados privados e sensitivos.
 
-Para isso, serão utilizados apenas servidores de alta segurança para o armazenamento dos dados sensitivos.
+Do ponto de vista tecnológico, serão utilizados apenas servidores de alta segurança para o armazenamento dos dados sensitivos. Além disso, protocolos seguros com criptografia protegerão todo o tráfego de dados do sistema.
 
-Além disso, serão utilizados protocolos seguros, com criptografia, para todo o tráfego de dados do sistema.
+Por fim, serão adotados procedimentos internos para aumentar a segurança e evitar vazamentos de dados. Por exemplo, o acesso aos sistemas corporativos será protegido por autenticação de dois fatores e haverá um sistema de controle de permissões para liberar o acesso a certos dados e funcionalidades apenas aos funcionários permitidos.
 
 \section{Comércio Eletrônico}
 
-Haverá comércio inicialmente através de parceiros estratégicos em contato direto (revendedores locais, como instaladores de sistemas de alarmes), e comércio eletrônico após obtenção de escala, em duas etapas distintas:
+A venda ocorrerá inicialmente através de parceiros estratégicos em contato direto (revendedores locais, como instaladores de sistemas de alarmes). Após obtenção de escala, a venda também acontecerá por comércio eletrônico em duas etapas distintas:
+
 \begin{enumerate}
 	\item Email: canal consolidado de pedidos e comunicação com fornecedores e clientes (reclamações e pós compra);
-	\item \textit{Site}: portal próprio, protegido por https com certificado digital, para a gestão de relacionamento com clientes e fornecedores, buscando expansão do \textit{e-commerce}. 
+	\item \textit{Site}: portal próprio, protegido por HTTPS com certificado digital, para a gestão de relacionamento com clientes e fornecedores, buscando expansão do \textit{e-commerce}.
 \end{enumerate}
 
 \section{Social Business}
 
-A publicidade será feita por página em redes sociais (Facebook), manutenção de página no GitHub, Canal no Youtube, Blog com tutoriais (e evolução do projeto). A ideia é fazer uma comunidade fiel ao conceito de casa conectada, através dos seguintes canais:
+A publicidade será feita por página em redes sociais (Facebook), manutenção de página no GitHub, canal no Youtube, blog com tutoriais e evolução do projet). A ideia é criar uma comunidade fiel ao conceito de casa conectada através dos seguintes canais:
+
 \begin{enumerate}
 	\item \textbf{Facebook}: Usuários podem enviar feedbacks, requisições e espalhar anúncios de produtos prontos;
 	\item \textbf{GitHub}: Usuários que gostam de programar podem interagir com o projeto (código livre);
-	\item \textbf{Youtube}: Videos demonstrando funcionalidades e situações de uso, além de servir de suporte para o blog;
+	\item \textbf{Youtube}: Vídeos demonstrando funcionalidades e situações de uso, além de servir de suporte para o blog;
 	\item \textbf{Blog}: Contém os vários tutoriais relativos aos diferentes usos dos módulos, além de notícias sobre a evolução do projeto (novas funcionalidades e módulos).
 \end{enumerate}
 
 \section{Inteligência de Negócios e Gestão de Riscos}
 
-A inteligência de negócios se faz extremamente necessária no decorrer do desenvolvimento da empresa. A partir da mesma, será possível analisar quais estratégias estão sendo bem sucedidas e aceitas pelos usuários, e quais podem ser modificadas.
+A inteligência de negócios se faz extremamente necessária no decorrer do desenvolvimento da empresa. A partir dela, será possível analisar quais estratégias estão sendo bem sucedidas e aceitas pelos usuários e quais podem ser modificadas.
 
-Para poder tomar decisões acertadamente, é de suma importância a coleta de dados nos quais possamos nos basear para analisar o negócio. Isso ocorrerá por meio de coleta de dados de uso, e coleta de acertos de previsões de aprendizado de máquina, para que possamos entender quão bem o produto está servindo às necessidades dos usuários.
+Para poder tomar decisões acertadamente, é de suma importância a coleta de dados nos quais possamos nos basear para analisar o negócio. Isso ocorrerá por meio da coleta de dados de uso e da coleta de acertos das previsões de aprendizado de máquina, a fim de que possamos entender quão bem o produto está servindo às necessidades dos usuários.
 
-A inteligência de negócios também será utilizada para ajudar a prever picos de demanda, para que a empresa esteja mais bem preparada para atender à mesma.
+A inteligência de negócios também será utilizada para ajudar a prever picos de demanda, para que a empresa esteja mais bem preparada para atendê-la.
 
-Segue matriz SWOT para análise de riscos:
+Segue matriz SWOT com a análise de riscos:
 
 \begin{figure}[htb]
 	\caption{\label{fig:SWOT}Matriz SWOT}
