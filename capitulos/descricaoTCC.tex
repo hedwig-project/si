@@ -1,6 +1,8 @@
 \chapter{Breve Descrição do Projeto de Formatura}
 
-O projeto de formatura tem como objetivo o desenvolvimento de um sistema de automação residencial completo, com foco na robustez, segurança e facilidade de uso. Para tanto, a modelagem de uma arquitetura flexível, mas que suportasse os requisitos iniciais, tem papel essencial no trabalho. A plataforma do sistema é enfática em sua proposta de camadas, na qual a integração entre os níveis é feita por meio de troca de mensagens, utilizando a infraestrutura de comunicação desenvolvida. A \autoref{fig:sistemaHedwig} ilustra o sistema como um todo.
+O projeto de formatura tem como objetivo o desenvolvimento de um sistema de automação residencial completo, com foco na robustez, segurança e facilidade de uso. Para tanto, foi modelada uma arquitetura flexível que pudesse ser facilmente expandida, mas que suportasse os requisitos iniciais. A plataforma do sistema é enfática em sua proposta de camadas, na qual a integração entre os níveis é feita por meio de troca de mensagens, utilizando a infraestrutura de comunicação desenvolvida. A \autoref{fig:sistemaHedwig} ilustra o sistema como um todo.
+
+No decorrer desta seção, serão apresentados os pontos essenciais do projeto, bem como a descrição das soluções adotadas.
 
 \begin{figure}[H]
 	\caption{\label{fig:sistemaHedwig}Sistema Hedwig}
@@ -10,20 +12,18 @@ O projeto de formatura tem como objetivo o desenvolvimento de um sistema de auto
 	\legend{Fonte: os autores}
 \end{figure}
 
-No decorrer desta seção, serão apresentados os pontos essenciais do projeto, bem como a descrição das soluções adotadas.
-
 \section{Hardware}
 
 Para a criação dos módulos de hardware, foram escolhidos componentes de \wiot{} comerciais, que possuem preços acessíveis, ampla documentação disponível e uma comunidade de desenvolvedores crescente.
 
 A interconexão dos componentes, bem como a comunicação com o mundo externo pela internet será intermediada por um servidor local, que rodará na plataforma Raspberry Pi, rodando um sistema operacional Linux (Raspbian, baseado em Debian) e que dispõe da interface de hardware necessária para conexão com a rede.
 
-Os sensores e atuadores devem ser conectados fisicamente com um módulo controlador, de modo que, para contornarmos essa limitação, utilizaremos módulos ESP8266 para transmissão sem fio por meio de Wi-Fi. Esses módulos serão responsáveis pela transmissão das informações recebidas para o servidor local. 
+Os sensores e atuadores devem ser conectados fisicamente com um módulo controlador, de modo que, para contornarmos essa limitação, utilizaremos módulos ESP8266 para transmissão sem fio por meio de Wi-Fi. Esses módulos serão responsáveis pela transmissão das informações recebidas para o servidor local.
 
 \begin{figure}[H]
 	\caption{\label{fig:QuatroModulos}Módulos de Hardware}
 	\begin{center}
-		\includegraphics[scale=0.5]{QuatroModulos}
+		\includegraphics[width=1.0\textwidth]{QuatroModulos}
 	\end{center}
 	\legend{Fonte: os autores}
 \end{figure}
@@ -33,7 +33,7 @@ Em geral, esses módulos consistem do microcontrolador, relés, sensores e fonte
 \begin{figure}[H]
 	\caption{\label{fig:diagramaModuloBase}Diagrama do Módulo de Iluminação}
 	\begin{center}
-		\includegraphics[scale=0.5]{diagramaModuloBase}
+		\includegraphics[width=0.7\textwidth]{diagramaModuloBase}
 	\end{center}
 	\legend{Fonte: os autores}
 \end{figure}
@@ -43,14 +43,16 @@ Em geral, esses módulos consistem do microcontrolador, relés, sensores e fonte
 
 As partes de software do sistema são divididas de acordo com a sua aplicação, localização e uso.
 
-Em contato mais próximo dos dispositivos de hardware está o servidor local, Morpheus. O servidor local é responsável pela interconexão dos módulos da casa com os serviços de nuvem disponíveis. A troca de informação entre os módulos físicos e o Morpheus é realizada por meio de mensagens, codificadas em um protocolo desenvolvido pelo grupo, e encaminhadas por meio do protocolo MQTT, com um broker local disponível na residência. O envio de mensagens é feito em tópicos, aos quais o módulo pode publicar ou se inscrever de acordo com o seu serial number, de modo a evitar que um módulo consiga ter acesso ao canal de outro módulo. O servidor local, no entanto, precisa de um certificado válido para que possa se inscrever no seu canal, onde a troca de mensagens é realizada com criptografia assíncrona. Quando a mensagem chega nesse servidor, ela é convertida em um formato intermediário e colocada em um fila de entrada, onde uma thread de um pool irá retirá-la para efetuar o processamento, e conversão para um JSON esperado pela nuvem.
+Em contato mais próximo dos dispositivos de hardware está o servidor local, Morpheus. O servidor local é responsável pela interconexão dos módulos da casa com os serviços de nuvem disponíveis. A troca de informação entre os módulos físicos e o Morpheus é realizada por meio de mensagens, codificadas em um protocolo desenvolvido pelo grupo e encaminhadas por meio do protocolo MQTT, com um broker local disponível na residência. O envio de mensagens é feito em tópicos, nos quais o módulo pode publicar ou se inscrever de acordo com o seu serial number, de modo a evitar que um módulo consiga ter acesso ao canal de outro módulo. O servidor local, no entanto, precisa de um certificado válido para que possa se inscrever no seu canal, onde a troca de mensagens é realizada com criptografia assíncrona. Quando a mensagem chega nesse servidor, ela é convertida em um formato intermediário e colocada em um fila de entrada, onde uma thread de um pool irá retirá-la para efetuar o processamento, e conversão para um JSON esperado pela nuvem.
 
-A segunda transmissão de dados, entre o Morpheus e os serviços de nuvem é feita por meio de um canal WebSocket, no qual a conexão permanece ativa a todo o momento. Os serviços de nuvem tratam a chegada da mensagem, e interagem com um cliente web, por meio de um dashboard, sobre o qual o usuário pode interagir.
+A segunda transmissão de dados - entre o Morpheus e os serviços de nuvem - é feita por meio de um canal WebSocket, no qual a conexão permanece ativa a todo o momento. Os serviços de nuvem tratam a chegada da mensagem, salvam os dados coletados pelos sensores em uma base de dados e repassam essas atualizações para aplicativos clientes.
 
-\begin{figure}[htb]
+Por fim, os usuários finais podem interagir com um aplicativo web que apresenta dados na forma de uma \emph{dashboard}, permitindo acionar manualmente os relés, programar um alarme, configurar o acionamento automático de relés de acordo com a hora ou o sinal de um sensor ou abrir o portão com uma senha.
+
+\begin{figure}[H]
 	\caption{\label{fig:dashboard}Dashboard}
 	\begin{center}
-		\includegraphics[width=0.8\textwidth]{dashboard}
+		\includegraphics[width=1.0\textwidth]{dashboard}
 	\end{center}
 	\legend{Fonte: os autores}
 \end{figure}
